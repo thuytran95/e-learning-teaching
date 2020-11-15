@@ -7,9 +7,9 @@ import DetailScreen from "./Screen/Detail";
 function App() {
   return (
     <>
-      {/* <HomeScreen /> */}
+      <HomeScreen />
       {/* <DetailScreen /> */}
-      <SignupScreen />
+      {/* <SignupScreen /> */}
     </>
   );
 }

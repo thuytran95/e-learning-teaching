@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import CourseItem from "../../Components/CourseItem";
 import Axios from "axios";
 import { connect } from "react-redux";
-import { courseService } from "../../Service";
-import { createAction } from "../../Redux/Action";
+import { fetchCourse } from "../../Redux/Action/user.action";
 
 class HomeScreen extends Component {
   render() {
@@ -23,16 +22,13 @@ class HomeScreen extends Component {
     );
   }
   //   chay sau render, chay dung 1 lan duy nhat
+  /* coong dung: mo con duong dispatch lên trên store đồng thời kích hoạt hàm fetchCourse 
+  -> call API từ server, server trả về dữ liệu thì tiêp tục đưa dữ liệu lên cho store
+  Không có gì chắc chăn rằng lên trên store rồi có dữ liệu trả về hay chưa -> bất đồng bộ, thời gian trả về ko dự đoán đk
+  Cần sử dụng middleware: lớp chắn ngang giữa component vs store, bất kỳ action nào đi lên store đều phải đi qua middleware
+  */
   componentDidMount() {
-    courseService
-      .fetchCourse()
-      .then((res) => {
-        console.log(res.data);
-        this.props.dispatch(createAction("FETCH_COURSES", res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.dispatch(fetchCourse());
   }
 }
 
