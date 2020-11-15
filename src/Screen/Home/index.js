@@ -3,6 +3,7 @@ import CourseItem from "../../Components/CourseItem";
 import Axios from "axios";
 import { connect } from "react-redux";
 import { courseService } from "../../Service";
+import { createAction } from "../../Redux/Action";
 
 class HomeScreen extends Component {
   render() {
@@ -27,10 +28,7 @@ class HomeScreen extends Component {
       .fetchCourse()
       .then((res) => {
         console.log(res.data);
-        this.props.dispatch({
-          type: "FETCH_COURSES",
-          payload: res.data,
-        });
+        this.props.dispatch(createAction("FETCH_COURSES", res.data));
       })
       .catch((err) => {
         console.log(err);

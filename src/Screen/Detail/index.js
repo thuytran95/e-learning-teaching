@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { connect } from "react-redux";
 import { courseService } from "../../Service";
+import { createAction } from "../../Redux/Action";
 
 class DetailScreen extends Component {
   render() {
@@ -18,10 +19,7 @@ class DetailScreen extends Component {
       .fetchCourseDetail()
       .then((res) => {
         // console.log(res);
-        this.props.dispatch({
-          type: "FETCH_COURSE_DETAIL",
-          payload: res.data,
-        });
+        this.props.dispatch(createAction("FETCH_COURSE_DETAIL", res.data));
       })
       .catch((err) => {
         console.log(err);
