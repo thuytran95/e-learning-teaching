@@ -1,29 +1,44 @@
 import React, { Component } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { signUpUserSchema } from "../../Service/user";
+import { userService } from "../../Service";
+
+// schema do minh tao ra de validation du lieu thu duoc tu form
 
 class SignupScreen extends Component {
   // tạo hanfm trong onSubmit
   _handleSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
+    // tach axios ra file riêng trong service
+    userService
+      .signUp(values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   render() {
     return (
       <div className="w-50 mx-auto">
         <h1 className="display-4 text-center">Sign Up</h1>
         <Formik
-          // phai co gia tri ban dau
+          // phai co gia tri ban dau -> muonn khoỉ chon ô select thì mặc định nó là GP01
           initialValues={{
             taiKhoan: "",
             matKhau: "",
             hoTen: "",
             soDT: "",
-            maNhom: "",
+            maNhom: "GP01",
             email: "",
           }}
-          // ham thu 2 can phai co
+          validationSchema={signUpUserSchema}
+          // ham thu 2 can phai co: truoc khi chay hafm handelsubmit thi formik se xet xem schema validate da dung chua
+          // neu hop le c
           onSubmit={this._handleSubmit}
-          // render nhan vao mot formikprops
-          render={(formikProps) => {
+        >
+          {(formikProps) => (
             <Form>
               <div className="form-group">
                 <label>Tài khoản: </label>
@@ -34,6 +49,9 @@ class SignupScreen extends Component {
                   className="form-control"
                   placeholder
                 />
+                <ErrorMessage name="taiKhoan">
+                  {(msg) => <div className="alert bg-danger">{msg}</div>}
+                </ErrorMessage>
               </div>
               <div className="form-group">
                 <label>Mât khẩu: </label>
@@ -44,6 +62,7 @@ class SignupScreen extends Component {
                   className="form-control"
                   placeholder
                 />
+                <ErrorMessage name="matKhau" />
               </div>
               <div className="form-group">
                 <label>Họ tên: </label>
@@ -54,6 +73,7 @@ class SignupScreen extends Component {
                   className="form-control"
                   placeholder
                 />
+                <ErrorMessage name="hoTen" />
               </div>
               <div className="form-group">
                 <label>Email: </label>
@@ -64,6 +84,7 @@ class SignupScreen extends Component {
                   className="form-control"
                   placeholder
                 />
+                <ErrorMessage name="email" />
               </div>
               <div className="form-group">
                 <label>Số điện thoại: </label>
@@ -74,10 +95,12 @@ class SignupScreen extends Component {
                   className="form-control"
                   placeholder
                 />
+                <ErrorMessage name="soDT" />
               </div>
-              {/* <div className="form-group">
+              <div className="form-group">
                 <label>Mã nhóm: </label>
                 <Field
+                  as="select"
                   className="form-control"
                   name="maNhom"
                   onChange={formikProps.handleChange}
@@ -93,13 +116,16 @@ class SignupScreen extends Component {
                   <option>GP09</option>
                   <option>GP10</option>
                 </Field>
-              </div> */}
-              <div className="text-center">
-                <button className="btn btn-success">Submit</button>
+                <ErrorMessage name="maNhom" />
               </div>
-            </Form>;
-          }}
-        />
+              <div className="text-center">
+                <button className="btn btn-success" type="submit">
+                  Submit
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     );
   }
