@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class CourseItem extends Component {
+  // truyen tham so thong qua param
   render() {
     return (
       <div className="card mb-4">
@@ -15,7 +17,12 @@ export default class CourseItem extends Component {
           Instructor: {this.props.courseItem.nguoiTao.hoTen}
         </p>
         <p class="lead"> Rating: 5.0</p>
-        <button className="btn btn-success">Go to detail</button>
+        <Link
+          to={`/detail/${this.props.courseItem.maKhoaHoc}`}
+          className="btn btn-success"
+        >
+          Go to detail
+        </Link>
       </div>
     );
   }

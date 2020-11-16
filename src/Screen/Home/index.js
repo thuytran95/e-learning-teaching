@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CourseItem from "../../Components/CourseItem";
 import Axios from "axios";
 import { connect } from "react-redux";
-import { fetchCourse } from "../../Redux/Action/user.action";
+import { fetchCourse } from "../../Redux/Action/course";
 
 class HomeScreen extends Component {
   render() {

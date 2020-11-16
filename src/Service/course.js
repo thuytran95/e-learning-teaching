@@ -8,11 +8,10 @@ class CourseService {
     });
   }
 
-  fetchCourseDetail() {
+  fetchCourseDetail(id) {
     return Axios({
       method: "GET",
-      url:
-        "https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=Backend_01",
+      url: `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${id}`,
     });
   }
 }
