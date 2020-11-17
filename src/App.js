@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./Layouts/Header";
 import SignInScreen from "./Screen/Signin";
 import Parent from "./lifeCycle/parent";
+import DemoHook from "./ReactHook";
 {
   /* Muốn sử dụng cơ chế routing thì phải install react-router-dom
   co chế của switch mỗi lần chỉ cho truy cập vào 1 dường link, tuy nhiên route / phải dể dưới cùng sau khi nó check các route khác */
@@ -35,7 +36,8 @@ class App extends Component {
       //     </Route>
       //   </Switch>
       // </BrowserRouter>
-      <Parent />
+      // <Parent />
+      <DemoHook />
     );
   }
 }
