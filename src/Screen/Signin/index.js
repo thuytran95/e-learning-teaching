@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Formik, Form, Field } from "formik";
+import { connect } from "react-redux";
+import { login } from "../../Redux/Action/user";
 
 class SignInScreen extends Component {
   render() {
@@ -9,8 +11,11 @@ class SignInScreen extends Component {
           taiKhoan: "",
           matKhau: "",
         }}
+        // sau khi signin xong thi phai luu du lieu tren store va local storage
+        // de khi nguoi dung thoat trinh duyet khi vao lai thi van o trang thai login khong can dang nhap lai
         onSubmit={(values) => {
           console.log(values);
+          this.props.dispatch(login(values));
         }}
       >
         {/* bocs tách handelchange trong formikProps -> thông thường onChange = {formikProps.handelChange} */}
@@ -35,7 +40,9 @@ class SignInScreen extends Component {
                 className="form-control"
               />
             </div>
-            <button className="btn btn-success">Đăng nhập</button>
+            <button type="submit" className="btn btn-success">
+              Đăng nhập
+            </button>
           </Form>
         )}
       </Formik>
@@ -43,4 +50,4 @@ class SignInScreen extends Component {
   }
 }
 
-export default SignInScreen;
+export default connect()(SignInScreen);
