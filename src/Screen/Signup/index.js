@@ -22,7 +22,7 @@ class SignupScreen extends Component {
   render() {
     return (
       <div className="w-50 mx-auto">
-        <h1 className="display-4 text-center">Sign Up</h1>
+        <h1 className="display-4 text-center">Đăng ký</h1>
         <Formik
           // phai co gia tri ban dau -> muonn khoỉ chon ô select thì mặc định nó là GP01
           initialValues={{
